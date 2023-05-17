@@ -1,11 +1,11 @@
 import { Component } from "react";
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import css from "./App.module.css";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import {fetchImages } from "./fetchImages/fetchImages";
 import {Searchbar} from "./Searchbar/Searchbar";
-import Loader from "./Loader/Loader";
+import {Loader} from "./Loader/Loader";
 import { Button } from "./Button/Button";
 
 let page = 1;
@@ -18,18 +18,16 @@ export default class App extends Component {
     status: "idle",   
     totalHits: 0,
   };
-
   handleSubmit = async (inputName) => {
     if (inputName.trim() === "") {
-      return alert("Line is empty, please enter your request");
-      // return toast("Line is empty, please enter your request");
+      return toast("Please enter your request");
     } else {
       try {
         this.setState({ status: "pending" });
         const { totalHits, hits } = await fetchImages(inputName, page);
         if (hits.length < 1) {
           this.setState({ status: "idle" });
-          alert("There are no images matching your request.");
+          return toast("There are no images matching your request.");        
         } else {
           this.setState({
             images: hits,
@@ -64,6 +62,7 @@ export default class App extends Component {
       return (
         <div className={css.App}>
           <Searchbar onSubmit={this.handleSubmit} />
+          <ToastContainer autoClose={3000} />
         </div>
       );
     }
@@ -90,13 +89,11 @@ export default class App extends Component {
         <div className={css.App}>
           <Searchbar onSubmit={this.handleSubmit} />
           <ImageGallery page={page} images={this.state.images} />
-          {/* <ToastContainer autoClose={3000} /> */}
           {totalHits > 12 && totalHits > images.length && (
             <Button onClick={this.onNextPage} />
           )}
-          {/* <ToastContainer autoClose={3000} /> */}
         </div>
       );
-    }
-  }
+    } 
+  }      
 }
