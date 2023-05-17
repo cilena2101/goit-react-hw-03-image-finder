@@ -1,13 +1,13 @@
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css';
 import PropTypes from 'prop-types';
 
-export default function ImageGallery({ items }) {
+export default function ImageGallery({images}) {
   return (
     <>
       <ul className={css.ImageGallery}>
-        {items.map(item => (
-          <ImageGalleryItem key={item.id} item={item} />
+        {images.map(image => (
+          <ImageGalleryItem key={image.id} image={image} />
         ))}
       </ul>
     </>
@@ -15,5 +15,5 @@ export default function ImageGallery({ items }) {
 }
 
 ImageGallery.propTypes = {
-  items: PropTypes.array,
+  images: PropTypes.array,
 };

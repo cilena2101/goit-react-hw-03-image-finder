@@ -1,35 +1,84 @@
+// import { Component } from 'react';
+// import css from './Searchbar.module.css';
+// import PropTypes from 'prop-types';
+
+
+// export class Searchbar extends Component {
+//   state = {
+//     inputName: '',
+//   };
+
+//   onChangeInput = event => {
+//     this.setState({ inputName: event.currentTarget.value.toLowerCase() });
+//   };
+
+//   handleSubmit = event => {
+//     event.preventDefault();
+//     this.props.onSubmit(this.state.inputName);
+//     this.setState({ inputName: '' });
+//   };
+
+//   render() {
+//     const { inputName } = this.state.inputName;
+//     return (
+//       <header className={css.Searchbar}>
+//         <form className={css.SearchForm} onSubmit={this.handleSubmit}>
+//           <button type="submit" className={css.SearchForm__button}>
+//           </button>
+
+//           <input
+//             className={css.SearchForm__input}            
+//             value={inputName}
+//             onChange={this.onChangeInput}
+//             type="text"
+//             autoComplete="off"
+//             autoFocus
+//             placeholder="Search images and photos"
+//           />
+//         </form>
+//       </header>
+//     );
+//   }
+// }
+
+// Searchbar.propType = {
+//   onSubmit: PropTypes.func.isRequired,
+// };
+
+
+
 import { Component } from 'react';
 import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
+import { ImSearch } from 'react-icons/im';
 
 
-export default class Searchbar extends Component {
+export class Searchbar extends Component {
   state = {
-    inputData: '',
+    inputName: '',
   };
+  
   onChangeInput = event => {
-    this.setState({ inputData: event.currentTarget.value.toLowerCase() });
+    this.setState({ inputName: event.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.inputData);
-    this.setState({ inputData: '' });
-  };
+    this.props.onSubmit(this.state.inputName);
+  }
 
   render() {
-    const { inputData } = this.state.inputData;
+    const { inputName } = this.state.inputName;
     return (
       <header className={css.Searchbar}>
         <form className={css.SearchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={css.SearchForm__button}>
-            {/* <ImSearch size={25} /> */}
+          <ImSearch size={20} />
           </button>
 
           <input
-            className={css.SearchForm__input}
-            // name="inputData"
-            value={inputData}
+            className={css.SearchForm__input}            
+            value={inputName}
             onChange={this.onChangeInput}
             type="text"
             autoComplete="off"

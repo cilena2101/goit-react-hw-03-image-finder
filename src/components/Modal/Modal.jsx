@@ -20,7 +20,7 @@ export class Modal extends Component {
     }
   };
 
-  onOverlayClose = event => {
+  onModalClose = event => {
     if (event.currentTarget === event.target) {
       this.props.onClose();
     }
@@ -29,7 +29,7 @@ export class Modal extends Component {
   render() {
     const { largeImageURL } = this.props.image;
     return createPortal(
-      <div onClick={this.onOverlayClose} className={css.Overlay}>
+      <div onClick={this.onModalClose} className={css.Overlay}>
         <div className={css.Modal}>
           <img src={largeImageURL} alt="img" />
         </div>
